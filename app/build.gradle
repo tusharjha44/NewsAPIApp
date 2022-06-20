@@ -15,13 +15,15 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
-
+        buildConfigField 'String', "ApiKey", MY_KEY
+        buildConfigField 'String', "BaseUrl", MY_URL
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -95,6 +97,7 @@ dependencies {
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:4.9.0'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'

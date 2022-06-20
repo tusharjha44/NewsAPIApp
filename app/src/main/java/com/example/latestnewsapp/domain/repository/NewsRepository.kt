@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface NewsRepository {
 
-    suspend fun getNewsHeadlines(): Resource<NewsResponse>
+    suspend fun getNewsHeadlines(country: String,page: Int): Resource<NewsResponse>
     suspend fun searchNews(searchQuery: String): Resource<NewsResponse>
 
     suspend fun saveNews(article: Article)
