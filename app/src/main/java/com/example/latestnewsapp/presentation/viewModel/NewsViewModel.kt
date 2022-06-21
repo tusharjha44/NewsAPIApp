@@ -11,6 +11,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.latestnewsapp.data.model.NewsResponse
 import com.example.latestnewsapp.data.util.Resource
 import com.example.latestnewsapp.domain.useCase.GetNewsHeadlinesUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
@@ -18,7 +19,7 @@ class NewsViewModel(
     private val app: Application,
     private val getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase
 ): AndroidViewModel(app) {
-    private val newsHeadLines: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
+    val newsHeadLines: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
 
 
     fun getNewsHeadlines(country: String,page: Int) = viewModelScope.launch {
