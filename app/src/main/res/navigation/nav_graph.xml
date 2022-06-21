@@ -18,7 +18,11 @@
         android:id="@+id/infoFragment"
         android:name="com.example.latestnewsapp.InfoFragment"
         android:label="fragment_info"
-        tools:layout="@layout/fragment_info" />
+        tools:layout="@layout/fragment_info" >
+        <argument
+            android:name="selected_article"
+            app:argType="com.example.latestnewsapp.data.model.Article" />
+    </fragment>
     <fragment
         android:id="@+id/savedFragment"
         android:name="com.example.latestnewsapp.SavedFragment"

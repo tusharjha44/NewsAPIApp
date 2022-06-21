@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.latestnewsapp.data.util.Resource
@@ -20,7 +22,7 @@ class NewsFragment : Fragment() {
     private  lateinit var viewModel: NewsViewModel
     private lateinit var newsAdapter: NewsAdapter
     private lateinit var fragmentNewsBinding: FragmentNewsBinding
-    private var country = "in"
+    private var country = "us"
     private var page = 1
     private var isScrolling = false
     private var isLoading = false
@@ -45,6 +47,15 @@ class NewsFragment : Fragment() {
 
         viewModel = (activity as MainActivity).viewModel
         newsAdapter= (activity as MainActivity).newsAdapter
+        newsAdapter.setOnItemClickListener {
+            val bundle = Bundle().apply {
+                putSerializable("selected_article",it)
+            }
+            findNavController().navigate(
+                R.id.action_newsFragment_to_infoFragment,
+                bundle
+            )
+        }
 
         initRecyclerView()
         viewList()
