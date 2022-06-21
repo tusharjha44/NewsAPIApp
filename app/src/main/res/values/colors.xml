@@ -7,4 +7,16 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+<!--    <color name="list_text">#3A3E59</color>-->
+<!--    <color name="list_background">#FEBB75</color>-->
+<!--    <color name="layout_background">#F2CAC8</color>-->
+<!--    <color name="search_background">#FB948F</color>-->
+
+
+    <color name="list_text">#FFFFFFFF</color>
+    <color name="list_background">#2F2C2A</color>
+    <color name="layout_background">#000000</color>
+    <color name="search_background">#53453C</color>
+
 </resources>
