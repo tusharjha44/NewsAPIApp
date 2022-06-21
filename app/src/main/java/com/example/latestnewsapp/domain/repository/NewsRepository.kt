@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 interface NewsRepository {
 
     suspend fun getNewsHeadlines(country: String,page: Int): Resource<NewsResponse>
-    suspend fun searchNews(searchQuery: String): Resource<NewsResponse>
+    suspend fun searchNews(country: String,searchQuery: String,page: Int): Resource<NewsResponse>
 
     suspend fun saveNews(article: Article)
     suspend fun deleteNews(article: Article)

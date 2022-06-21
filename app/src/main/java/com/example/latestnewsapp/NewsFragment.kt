@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
+import android.widget.SearchView
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,14 +15,16 @@ import com.example.latestnewsapp.data.util.Resource
 import com.example.latestnewsapp.databinding.FragmentNewsBinding
 import com.example.latestnewsapp.presentation.adapter.NewsAdapter
 import com.example.latestnewsapp.presentation.viewModel.NewsViewModel
-import javax.inject.Inject
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class NewsFragment : Fragment() {
 
     private  lateinit var viewModel: NewsViewModel
     private lateinit var newsAdapter: NewsAdapter
     private lateinit var fragmentNewsBinding: FragmentNewsBinding
-    private var country = "us"
+    private var country = "in"
     private var page = 1
     private var isScrolling = false
     private var isLoading = false
@@ -59,6 +61,7 @@ class NewsFragment : Fragment() {
 
         initRecyclerView()
         viewList()
+        setSearchView()
     }
 
     private fun viewList() {
@@ -69,10 +72,10 @@ class NewsFragment : Fragment() {
                     hideProgressBar()
                     response.data?.let {
                         newsAdapter.differ.submitList(it.articles.toList())
-                        if(it.totalResults%20 == 0){
-                            pages = it.totalResults/20
+                        pages = if(it.totalResults%20 == 0){
+                            it.totalResults/20
                         }else{
-                            pages = it.totalResults/20+1
+                            it.totalResults/20+1
                         }
                         isLastPage = page == pages
                     }
@@ -133,4 +136,63 @@ class NewsFragment : Fragment() {
             }
         }
     }
+
+    private fun setSearchView(){
+        fragmentNewsBinding.svNews.setOnQueryTextListener(
+            object : SearchView.OnQueryTextListener{
+                override fun onQueryTextSubmit(p0: String?): Boolean {
+                    viewModel.getSearchedNewsHeadlines(country,p0.toString(),page)
+                    viewSearchedNews()
+                    return false
+                }
+
+                override fun onQueryTextChange(p0: String?): Boolean {
+                    MainScope().launch {
+                        delay(2000)
+                        viewModel.getSearchedNewsHeadlines(country, p0.toString(), page)
+                        viewSearchedNews()
+                    }
+                    return false
+                }
+            })
+
+        fragmentNewsBinding.svNews.setOnCloseListener {
+            initRecyclerView()
+            viewSearchedNews()
+            false
+        }
+
+
+    }
+
+
+    fun viewSearchedNews(){
+        viewModel.searchedHeadlines.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Resource.Success -> {
+                    hideProgressBar()
+                    response.data?.let {
+                        newsAdapter.differ.submitList(it.articles.toList())
+                        pages = if(it.totalResults%20 == 0){
+                            it.totalResults/20
+                        }else{
+                            it.totalResults/20+1
+                        }
+                        isLastPage = page == pages
+                    }
+                }
+                is Resource.Error -> {
+                    hideProgressBar()
+                    response.message?.let {
+                        Toast.makeText(activity,"An error occurred : $it", Toast.LENGTH_LONG).show()
+                    }
+                }
+                is Resource.Loading -> {
+                    showProgressBar()
+                }
+            }
+
+        }
+    }
+
 }
