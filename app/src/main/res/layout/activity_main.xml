@@ -22,7 +22,7 @@
         android:id="@+id/bnv_news"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="0.75"
         android:background="@color/search_background"
         app:itemTextColor="@color/list_text"
         app:itemIconTint="@color/list_text"

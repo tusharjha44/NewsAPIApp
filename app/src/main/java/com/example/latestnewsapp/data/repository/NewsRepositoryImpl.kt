@@ -35,14 +35,12 @@ class NewsRepositoryImpl(
     }
 
     override suspend fun deleteNews(article: Article) {
-//        newsLocalDataSource.deleteArticlesFromDB(article)
-        TODO()
+        newsLocalDataSource.deleteArticlesFromDB(article)
     }
 
 
     override fun getSavedNews(): Flow<List<Article>> {
-//        return newsLocalDataSource.getSavedArticles()
-    TODO()
+        return newsLocalDataSource.getSavedArticles()
     }
 
 }

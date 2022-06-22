@@ -8,12 +8,12 @@ import kotlinx.coroutines.flow.Flow
 interface ArticlesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(article: Article)
-//
-//    @Query("SELECT * FROM articles")
-//    fun getAllArticles(): Flow<List<Article>>
-//
-//    @Delete
-//    suspend fun deleteArticle(article: Article)
+
+    @Query("SELECT * FROM articles")
+    fun getAllArticles(): Flow<List<Article>>
+
+    @Delete
+    suspend fun deleteArticle(article: Article)
 
 
 }

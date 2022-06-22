@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebViewClient
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.navArgs
 import com.example.latestnewsapp.databinding.FragmentInfoBinding
 import com.example.latestnewsapp.presentation.viewModel.NewsViewModel
@@ -44,7 +45,7 @@ class InfoFragment : Fragment() {
 
         fragmentInfoBinding.fabSave.setOnClickListener {
             viewModel.saveArticle(article)
-//            Snackbar.make(activity,"Saved Successfully!",Snackbar.LENGTH_LONG).show()
+            Snackbar.make((activity as MainActivity).findViewById(android.R.id.content),"Saved Successfully!",Snackbar.LENGTH_LONG).show()
 
         }
 

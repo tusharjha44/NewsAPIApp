@@ -1,9 +1,7 @@
 package com.example.latestnewsapp.presentation.di
 
 import android.app.Application
-import com.example.latestnewsapp.domain.useCase.GetNewsHeadlinesUseCase
-import com.example.latestnewsapp.domain.useCase.SaveNewsUseCase
-import com.example.latestnewsapp.domain.useCase.SearchedNewsUseCase
+import com.example.latestnewsapp.domain.useCase.*
 import com.example.latestnewsapp.presentation.viewModel.NewsViewModelFactory
 import dagger.Module
 import dagger.Provides
@@ -21,13 +19,17 @@ class FactoryModule {
         app: Application,
         getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase,
         getSearchedNewsUseCase: SearchedNewsUseCase,
-        saveNewsUseCase: SaveNewsUseCase
+        saveNewsUseCase: SaveNewsUseCase,
+        getSavedNewsUseCase: GetSavedNewsUseCase,
+        deleteSavedNewsUseCase: DeleteSavedNewsUseCase
     ): NewsViewModelFactory{
         return NewsViewModelFactory(
             app,
             getNewsHeadlinesUseCase,
             getSearchedNewsUseCase,
-            saveNewsUseCase
+            saveNewsUseCase,
+            getSavedNewsUseCase,
+            deleteSavedNewsUseCase
         )
     }
 

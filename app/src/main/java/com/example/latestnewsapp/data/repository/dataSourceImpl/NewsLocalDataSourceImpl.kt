@@ -12,13 +12,11 @@ class NewsLocalDataSourceImpl(
         articlesDao.insert(article)
     }
 
-//    override fun getSavedArticles(): Flow<List<Article>> {
-////        return articlesDao.getAllArticles()
-//        TODO()
-//    }
+    override fun getSavedArticles(): Flow<List<Article>> {
+        return articlesDao.getAllArticles()
+    }
 
-//    override suspend fun deleteArticlesFromDB(article: Article) {
-////        articlesDao.deleteArticle(article)
-//        TODO()
-//    }
+    override suspend fun deleteArticlesFromDB(article: Article) {
+        articlesDao.deleteArticle(article)
+    }
 }
