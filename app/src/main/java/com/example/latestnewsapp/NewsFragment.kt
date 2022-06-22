@@ -24,7 +24,7 @@ class NewsFragment : Fragment() {
     private  lateinit var viewModel: NewsViewModel
     private lateinit var newsAdapter: NewsAdapter
     private lateinit var fragmentNewsBinding: FragmentNewsBinding
-    private var country = "in"
+    private var country = "us"
     private var page = 1
     private var isScrolling = false
     private var isLoading = false
@@ -49,6 +49,7 @@ class NewsFragment : Fragment() {
 
         viewModel = (activity as MainActivity).viewModel
         newsAdapter= (activity as MainActivity).newsAdapter
+
         newsAdapter.setOnItemClickListener {
             val bundle = Bundle().apply {
                 putSerializable("selected_article",it)
@@ -141,7 +142,7 @@ class NewsFragment : Fragment() {
         fragmentNewsBinding.svNews.setOnQueryTextListener(
             object : SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(p0: String?): Boolean {
-                    viewModel.getSearchedNewsHeadlines(country,p0.toString(),page)
+                    viewModel.getSearchedNewsHeadlines("us",p0.toString(),page)
                     viewSearchedNews()
                     return false
                 }
@@ -149,7 +150,7 @@ class NewsFragment : Fragment() {
                 override fun onQueryTextChange(p0: String?): Boolean {
                     MainScope().launch {
                         delay(2000)
-                        viewModel.getSearchedNewsHeadlines(country, p0.toString(), page)
+                        viewModel.getSearchedNewsHeadlines("us", p0.toString(), page)
                         viewSearchedNews()
                     }
                     return false

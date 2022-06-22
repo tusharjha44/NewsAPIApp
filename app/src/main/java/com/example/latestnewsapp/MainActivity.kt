@@ -36,8 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.bnvNews.setupWithNavController(navController)
 
-        viewModel = ViewModelProvider(this,factory)
-            .get(NewsViewModel::class.java)
+        viewModel = ViewModelProvider(this,factory)[NewsViewModel::class.java]
 
     }
 }

@@ -9,13 +9,15 @@ import com.example.latestnewsapp.domain.useCase.*
 class NewsViewModelFactory(
     private val app: Application,
     private val getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase,
-    private val getSearchedNewsUseCase: SearchedNewsUseCase
+    private val getSearchedNewsUseCase: SearchedNewsUseCase,
+    private val savedNewsUseCase: SaveNewsUseCase
 ): ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return NewsViewModel(
             app,
             getNewsHeadlinesUseCase,
-            getSearchedNewsUseCase
+            getSearchedNewsUseCase,
+            savedNewsUseCase
         ) as T
     }
 }
