@@ -23,7 +23,7 @@ data class Article(
     @SerializedName("publishedAt")
     val publishedAt: String?,
     @SerializedName("source")
-    val source : @RawValue Source?,
+    val source :  Source?,
     @SerializedName("title")
     val title: String?,
     @SerializedName("url")
